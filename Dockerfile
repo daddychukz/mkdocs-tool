@@ -1,11 +1,15 @@
 FROM python:3.7-alpine
 
+LABEL MAINTAINER="Chukwukadibia Durugo"
+LABEL application="MkDocs Tool"
+
 RUN apk update
-RUN pip install mkdocs 
+
+RUN apk add --no-cache tar gcc gzip musl-dev && pip install mkdocs 
 
 WORKDIR /MkDocs_tool
 
-COPY mkdockerize.sh /MkDocs_tool/scripts/mkdockerize.sh
+COPY mkdockerize.sh utils.sh /MkDocs_tool/scripts/
 
 RUN chmod 755 /MkDocs_tool/scripts/mkdockerize.sh
 
